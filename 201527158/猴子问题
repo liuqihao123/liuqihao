@@ -1,0 +1,75 @@
+#include<iostream>
+using namespace std;
+
+int fun(int m, int n)
+{
+	int monkey[100];
+	int number = m;
+	int k = 0;
+	for (int i = 0; i < number; ++i) {
+		monkey[i] = 1;
+	}
+	while (number > 1) {
+		for (int i = 0; i < m; ++i)
+		{
+			if (monkey[i] == 1)
+				++k;
+			if (k == n)
+			{
+				monkey[i] = 0;
+				k = 0;
+				--number;
+			}
+		}
+	}
+	for (int i = 0; i < m; ++i) {
+		if (monkey[i] == 1)
+			return i + 1;
+	}
+}
+
+struct ListNode
+{
+	int val;
+	ListNode *next;
+};
+
+int fun2(int m, int n)
+{
+	if (n == 1)	return m;
+	ListNode monkeys[100];
+	for (int i = 0; i < m-1; ++i) {
+		monkeys[i].val = i + 1;
+		monkeys[i].next = &monkeys[i + 1];
+	}
+	monkeys[m - 1].val = m;
+	monkeys[m - 1].next = &monkeys[0];
+
+	ListNode* p = &monkeys[0];
+	while (p->next != p) {
+		for (int i = 0; i < n - 2; ++i) {
+			p = p->next;
+		}
+		p->next = p->next->next;
+		p = p->next;
+	}
+	return p->val;
+}
+
+int main()
+{
+	int m, n;
+	cout << "����mֻ����: "; cin >> m;
+	cout << "��n����: "; cin >> n;
+	while (n >= m  && m < 100) {
+		cout << "Ҫ��n<m ����m<100, ����������" << endl;
+		cin >> m >> n;
+	}
+	int king1, king2;
+	king1=fun(m, n);	//First
+	king2 = fun2(m, n);	//Second
+	cout << "�����ǣ����飩��" << king1 << endl
+		<< "�����ǣ���������" << king2 << endl;
+	system("pause");
+	return 0;
+}
