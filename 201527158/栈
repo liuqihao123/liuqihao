@@ -1,0 +1,50 @@
+#include <iostream>
+#include <string.h> 
+#include <stack>
+using namespace std;
+
+int main(void) {
+		string input_string;
+		int s_length;
+		cin>>input_string;
+		
+		s_length=input_string.length();
+		
+		stack<int> number; //�������
+		stack<char> oper; //��żӼ����� 
+		
+		for(int i=0; i<s_length; i++)
+		{
+			if (input_string[i]>=48 && input_string[i]<=57)
+			{
+				number.push(input_string[i]-'0');
+			}
+			else
+			{
+				oper.push(input_string[i]);
+			}
+		}
+		
+		int result=0;
+		while(!oper.empty())//�����Ӽ� 
+		{
+			if (oper.top()=='+')
+			{
+				result+=number.top();
+				number.pop();
+			}
+			else
+			{
+				result-=number.top();
+				number.pop();
+			}
+			oper.pop();
+		}
+		if (!number.empty())//���ϵ�һ������ 
+		{
+			result+=number.top();
+			number.pop();
+		}
+
+		cout<<result<<endl;
+}
