@@ -1,0 +1,44 @@
+#include "stdio.h"
+void change(int a,int b)
+{int c = 100 * a + b;
+printf("%d %d\n",a,b);
+printf("%d",c);
+}
+main()
+{int a,b;
+scanf("%d%d",&a,&b);
+change (a,b);
+}
+
+
+#include "stdio.h"
+void change(int *a,int *b)
+{
+
+    int c = *a * 100 + *b ;
+    printf("a=%d b=%d\n",a,b);
+    printf("c=%d",c);
+}
+ main(void)
+{ 
+    int a,b;
+    scanf("%d%d",&a,&b);
+    change(&a,&b);
+
+}
+
+#include "stdio.h"
+void change(int &a,int &b)
+{
+    int c = a *100 + b;
+    printf("a=%d b=%d",a,b);
+    printf("c=%d",c);
+}
+
+int main(void)
+{ 
+    int a,b;
+    scanf("%d%d",&a,&b);
+    change(a,b);
+
+}
