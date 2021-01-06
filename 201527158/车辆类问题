@@ -1,0 +1,61 @@
+#include<iostream>
+using namespace std;
+
+class Vehicle
+{
+protected:
+	int wheels;
+	float weight;
+public:
+	Vehicle(int wh, float we) :wheels(wh), weight(we) {}
+	void display();
+};
+void Vehicle::display()
+{
+	cout << "wheels: " << wheels << endl;
+	cout << "weight: " << weight << endl << endl;
+}
+
+class Car :private Vehicle
+{
+private:
+	int passenger_load;
+public:
+	Car(int wh, float we, int pa) :Vehicle(wh, we), passenger_load(pa) {}
+	void display();
+};
+void Car::display()
+{
+	cout << "wheels: " << wheels << endl;
+	cout << "weight: " << weight << endl;
+	cout << "passengers: " << passenger_load << endl << endl;
+}
+
+class Truck :private Vehicle
+{
+private:
+	int passenger_load;
+	int payload;
+public:
+	Truck(int wh, float we, int pas, int pay) :Vehicle(wh, we), passenger_load(pas), payload(pay) {}
+	void display();
+};
+
+void Truck::display()
+{
+	cout << "wheels: " << wheels << endl;
+	cout << "weight: " << weight << endl;
+	cout << "passenger_load: " << passenger_load << endl;
+	cout << "payload: " << payload << endl << endl;
+}
+
+int main()
+{
+	Vehicle vehicle(4,2000);
+	Car car(4, 2000, 5);
+	Truck truck(8, 5000, 20, 1000);
+	vehicle.display();
+	car.display();
+	truck.display();
+	system("pause");
+}
