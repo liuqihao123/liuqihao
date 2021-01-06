@@ -1,0 +1,86 @@
+#include<iostream>
+#include<algorithm>
+#include <string.h>
+#include <vector>
+using namespace std;
+
+
+bool is_valid(int i, int j, int n, int m)
+{
+	if (i<0 || j<0 || i>m || j>m)
+		return false;
+	return true;
+ } 
+
+int main()
+{
+    int N, M;
+	cin>>M>>N; 
+	
+    vector<vector<char> > vec1(N); //�����ά��̬����
+    vector<vector<char> > vec2(N);
+    for(int i =0; i<N; i++)
+    { 
+        vec1[i].resize(M+1); 
+        vec2[i].resize(M+1); 
+    } 
+    
+    
+ 
+    for(int i=0; i<N; i++)//�������� 
+    {
+    	string input_string;
+		cin>>input_string;
+        for(int j=0;j<M;j++)
+        {
+        	vec1[i][j]=input_string[j];
+        	vec2[i][j]=vec1[i][j];
+        }
+    }
+    
+    int L;
+    cin>>L;
+    for(int k=0; k<L; k++)//k�ִ� 
+    {
+		for(int i=0; i<N; i++)//ÿһ�ָ�Ⱦ��� 
+		{
+			for(int j=0;j<M;j++)
+	        {
+	        	if (vec1[i][j]=='X')//����Ⱦ �������������ĸ����� 
+	        	{
+	        		if (is_valid(i-1,j,N,M) && vec1[i-1][j]!='P')
+						vec2[i-1][j]='X';
+						
+					if (is_valid(i+1,j,N,M) && vec1[i+1][j]!='P')
+						vec2[i+1][j]='X';
+						
+					if (is_valid(i,j-1,N,M) && vec1[i][j-1]!='P')
+						vec2[i][j-1]='X';
+						
+					if (is_valid(i,j+1,N,M) && vec1[i][j+1]!='P')
+						vec2[i][j+1]='X';
+				}
+	        }
+		}
+    	for(int i=0; i<N; i++)//���� 
+    	{
+    		for(int j=0;j<M;j++)
+    		{
+    			vec1[i][j]=vec2[i][j];
+			}
+		}
+	}
+    
+    
+	for(int i=0; i<N; i++)//������ 
+	{
+		for(int j=0;j<M;j++)
+		{
+			cout<<vec2[i][j];
+		}
+		cout<<endl;
+	}
+    
+    
+    
+}
