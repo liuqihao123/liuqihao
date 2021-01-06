@@ -1,0 +1,50 @@
+//3���������⣨��ѧ��
+
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+struct students{
+	int id; 
+	int yuwen;
+	int shuxue; 
+	int english;
+	int total;
+}s[1000];
+ 
+int sort_by_grade(students a,students b)
+{
+	if(a.total==b.total)//�ܷ���������ĳɼ����� 
+	   { 
+		    if(a.yuwen==b.yuwen)
+			{
+				return a.id<b.id; //���ĳɼ������ѧ����С�������� 
+			}
+		    return a.yuwen>b.yuwen;
+	   }
+	return a.total>b.total;  
+}
+
+
+int main()
+{
+	int n;
+	cin>>n;
+	
+	for(int i=1;i<=n;i++)//���� 
+	{
+		cin>>s[i].yuwen>>s[i].shuxue>>s[i].english;
+		s[i].total=s[i].yuwen+s[i].shuxue+s[i].english;
+		s[i].id=i;
+	}
+	
+	sort(s+1,s+n+1,sort_by_grade);//���� 
+	
+	cout<<endl<<"ǰ����ѧ��id�ͳɼ�Ϊ:"<<endl;
+	 
+	for(int i=1;i<=5;i++)//���ǰ5 
+	{
+		cout<<s[i].id<<' '<<s[i].total<<endl; 
+	}
+}
+
